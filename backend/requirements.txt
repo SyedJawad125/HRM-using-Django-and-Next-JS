@@ -1,0 +1,12 @@
+asgiref==3.7.2
+cffi==1.16.0
+cryptography==42.0.5
+Django==5.0.3
+django-filter==24.1
+djangorestframework==3.14.0
+pillow==10.2.0
+pycparser==2.21
+PyJWT==2.8.0
+pytz==2024.1
+sqlparse==0.4.4
+tzdata==2024.1
