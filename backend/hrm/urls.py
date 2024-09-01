@@ -24,7 +24,8 @@ urlpatterns = [
     # path('accounts/', include('allauth.urls')),
     path('user/', include('user_auth.urls')),
     path('permission/', include('permissions.urls')),
-    # path('ecommerce/', include('my_ecommerce.urls')),
+    path('hrm/', include('hrm.urls')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

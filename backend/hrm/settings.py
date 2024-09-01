@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'user_auth',
     'permissions',
+    'hrm'
 ]
 
 

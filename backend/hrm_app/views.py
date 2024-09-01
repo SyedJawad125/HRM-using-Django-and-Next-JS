@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from hrm_app.hrm_e_controller import DepartmentController, EmployeeController, RankController, SalaryController
+from hrm_app.hrm_e_controller import AttendanceController, DepartmentController, EmployeeController, RankController, SalaryController
 from utils.base_authentication import JWTAuthentication
 from rest_framework.viewsets import ModelViewSet
 
