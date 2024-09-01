@@ -24,7 +24,7 @@ urlpatterns = [
     # path('accounts/', include('allauth.urls')),
     path('user/', include('user_auth.urls')),
     path('permission/', include('permissions.urls')),
-    path('hrm/', include('hrm.urls')),
+    path('hrm/', include('hrm_app.urls')),
 
 ]
 if settings.DEBUG:
