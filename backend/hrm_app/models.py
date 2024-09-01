@@ -1,5 +1,6 @@
 from django.db import models
 
+from permissions.models import Role
 from user_auth.models import User
 
 # Create your models here.
@@ -16,18 +17,6 @@ class Department(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_dept', null=True, blank=True)
 
 
-class Rank(models.Model):
-    rank_title = models.CharField(max_length=50)
-    rank_description = models.TextField()
-    day_of_week = models.CharField(max_length=20)  # e.g., Monday, Tuesday, etc.
-    shift_start_time = models.TimeField(null=True, blank=True)
-    shift_end_time = models.TimeField(null=True, blank=True)
-    dept_has_rank = models.ForeignKey(Department, on_delete=models.CASCADE,related_name='dep_has_rank1', null=True, blank=True) 
-    user= models.ForeignKey(User, on_delete=models.CASCADE,related_name='user3', null=True, blank=True)
-    rank_added_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='rank_added_by_user1', null=True, blank=True)
-    rank_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='rank_updated_by_user1', null=True, blank=True)
-
-
 class Employee(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -39,10 +28,24 @@ class Employee(models.Model):
     department = models.CharField(max_length=50)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
+    employee_has_dept = models.ForeignKey(Department, on_delete=models.CASCADE,related_name='dept_employee', null=True, blank=True)
+    employee_has_role = models.ForeignKey(Role, on_delete=models.CASCADE,related_name='role_of_employee', null=True, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name='employee_created_by', null=True, blank=True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='employee_updated_by', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user1', null=True,blank=True)
-    rank = models.ForeignKey(Rank, on_delete=models.CASCADE, related_name='rank1', null=True,blank=True)
+    # rank = models.ForeignKey(Rank, on_delete=models.CASCADE, related_name='rank1', null=True,blank=True)
+
+class Rank(models.Model):
+    rank_title = models.CharField(max_length=50)
+    rank_description = models.TextField()
+    day_of_week = models.CharField(max_length=20)  # e.g., Monday, Tuesday, etc.
+    shift_start_time = models.TimeField(null=True, blank=True)
+    shift_end_time = models.TimeField(null=True, blank=True)
+    # dept_has_rank = models.ForeignKey(Department, on_delete=models.CASCADE,related_name='dep_has_rank1', null=True, blank=True) 
+    emp_has_rank = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='rank_of_emp', null=True, blank=True) 
+    user= models.ForeignKey(User, on_delete=models.CASCADE,related_name='user3', null=True, blank=True)
+    rank_added_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='rank_added_by_user1', null=True, blank=True)
+    rank_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='rank_updated_by_user1', null=True, blank=True)
 
 
 class Salary(models.Model):
@@ -57,4 +60,19 @@ class Salary(models.Model):
     sal_added_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='sal_added_by_user', null=True, blank=True)
     sal_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='sal_updated_by_user', null=True, blank=True)
 
-    
+
+class Attendance(models.Model):
+    date = models.DateField()
+    check_in_time = models.TimeField()
+    check_out_time = models.TimeField(blank=True, null=True)
+    status = models.CharField(
+        max_length=10,
+        choices=[('Present', 'Present'), ('Absent', 'Absent'), ('Leave', 'Leave')],
+        default='Absent'
+    )
+    employee_has_atten = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='atten_of_employee', null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='user4', null=True, blank=True)
+    atten_added_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='atten_added_by_user', null=True, blank=True)
+    atten_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='atten_updated_by_user', null=True, blank=True)
+    # total_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    # remarks = models.TextField(blank=True, null=True)

@@ -52,3 +52,14 @@ class RankFilter(FilterSet):
     class Meta:
         model = Rank
         fields ='__all__'
+
+
+class AttendanceFilter(FilterSet):
+    id = CharFilter(field_name='employee__id')
+    date_from = DateFilter(field_name='date', lookup_expr='gte')
+    date_to = DateFilter(field_name='date', lookup_expr='lte')
+    status = CharFilter(field_name='status', lookup_expr='icontains')
+
+    class Meta:
+        model = Attendance
+        fields = '__all__'

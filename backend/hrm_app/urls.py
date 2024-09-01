@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import DepartmentViews, RankViews, SalaryViews, empployeeViews
+from .views import AttendanceViews, DepartmentViews, RankViews, SalaryViews, empployeeViews
 
 urlpatterns = [
 
@@ -22,6 +22,11 @@ path('rank', RankViews.as_view({"get":"get_rank",
                             "post":"post_rank",
                             "patch":"update_rank",
                             "delete":"delete_rank"})),
+
+path('attendance', AttendanceViews.as_view({"get":"get_attendance",
+                            "post":"post_attendance",
+                            "patch":"update_attendance",
+                            "delete":"delete_attendance"})),
                             
 ]
 

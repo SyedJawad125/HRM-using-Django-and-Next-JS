@@ -8,6 +8,8 @@ employee_controller = EmployeeController()
 department_controller = DepartmentController()
 salary_controller = SalaryController()
 rank_controller = RankController()
+attendance_controller = AttendanceController()
+
 
 
 
@@ -74,3 +76,20 @@ class RankViews(ModelViewSet):
     
     def delete_rank(self, request):
         return rank_controller.delete_rank(request)
+    
+
+class AttendanceViews(ModelViewSet):
+
+    authentication_classes = [JWTAuthentication]
+
+    def post_attendance(self, request):
+        return attendance_controller.create(request)
+    
+    def get_attendance(self, request):
+        return attendance_controller.get_attendance(request)
+    
+    def update_attendance(self, request):
+        return attendance_controller.update_attendance(request)
+    
+    def delete_attendance(self, request):
+        return attendance_controller.delete_attendance(request)

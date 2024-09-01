@@ -1,5 +1,5 @@
 from rest_framework import serializers # type: ignore
-from hrm_app.models import Department, Employee, Rank, Salary
+from hrm_app.models import Attendance, Department, Employee, Rank, Salary
 from user_auth.user_serializer import UserListingSerializer
 
 
@@ -58,6 +58,20 @@ class RankSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['rank_added_by_user'] = UserListingSerializer(instance.rank_added_by_user).data if instance.rank_added_by_user else None
         data['rank_updated_by_user'] = UserListingSerializer(instance.rank_updated_by_user).data if instance.rank_updated_by_user else None
+        # data['dept_has_position'] = DepartmentListingSerializer(instance.dept_has_position).data if instance.dept_has_position else None
+        # data['rank_has_salary'] = SalaryListingSerializer(instance.posi_has_salary).data if instance.posi_has_salary else None
+        return data
+    
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Attendance
+        fields = '__all__'
+        
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['atten_added_by_user'] = UserListingSerializer(instance.atten_added_by_user).data if instance.atten_added_by_user else None
+        data['atten_updated_by_user'] = UserListingSerializer(instance.atten_updated_by_user).data if instance.atten_updated_by_user else None
         # data['dept_has_position'] = DepartmentListingSerializer(instance.dept_has_position).data if instance.dept_has_position else None
         # data['rank_has_salary'] = SalaryListingSerializer(instance.posi_has_salary).data if instance.posi_has_salary else None
         return data
