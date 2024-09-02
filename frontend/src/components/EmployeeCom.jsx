@@ -19,7 +19,7 @@ const EmployeeCom = () => {
   useEffect(() => {
     const receiveData = async () => {
       try {
-        const res = await AxiosInstance.get('/ecommerce/employee', {
+        const res = await AxiosInstance.get('/hrm/employee', {
           params: {
             limit: recordsPerPage,
             offset: (currentPage - 1) * recordsPerPage,
@@ -43,7 +43,7 @@ const EmployeeCom = () => {
 
   const deleteRecord = async (id) => {
     try {
-      const res = await AxiosInstance.delete(`/ecommerce/employee?id=${id}`);
+      const res = await AxiosInstance.delete(`/hrm/employee?id=${id}`);
       if (res) {
         toast.success('Employee deleted successfully!');
         setCurrentPage(1); // Reset to the first page after deletion
@@ -85,14 +85,14 @@ const EmployeeCom = () => {
       <h2 className="text-2xl font-bold mb-4 text-center text-white">Employees Record</h2>
 
       {/* Conditionally render the Add Employee button based on user permissions */}
-      {permissions.create_employee && (
+      {/* {permissions.create_employee && ( */}
         <button
           className="btn btn-primary mt-3 bg-blue-500 text-white py-2 px-4 rounded"
           onClick={() => router.push('/addemployeepage')}
         >
           Add Employee
         </button>
-      )}
+      {/* )} */}
 
       <br />
       <br />
@@ -141,22 +141,22 @@ const EmployeeCom = () => {
                     </button>
                     
                     {/* Conditionally render the Update and Delete buttons based on user permissions */}
-                    {permissions.update_employee && (
+                    {/* {permissions.update_employee && ( */}
                       <button
                         className="btn btn-primary bg-blue-500 text-white py-1 px-2 rounded"
                         onClick={() => updateRecord(item)}
                       >
                         Update
                       </button>
-                    )}
-                    {permissions.delete_employee && (
+                    {/* )} */}
+                    {/* {permissions.delete_employee && ( */}
                       <button
                         className="btn btn-danger bg-red-500 text-white py-1 px-2 rounded"
                         onClick={() => deleteRecord(item.id)}
                       >
                         Delete
                       </button>
-                    )}
+                    {/* )} */}
                   </div>
                 </li>
               ))}

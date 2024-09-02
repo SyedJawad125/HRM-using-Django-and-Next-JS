@@ -356,7 +356,7 @@ class RankController:
 
                 if instance:
                     request.POST._mutable = True
-                    request.data["pos_updated_by_user"] = request.user.guid
+                    request.data["rank_updated_by_user"] = request.user.guid
                     request.POST._mutable = False
 
                     # updating the instance/record
@@ -414,7 +414,7 @@ class AttendanceController:
     def create(self, request):
         try:
             request.POST._mutable = True
-            request.data["created_by"] = request.user.guid
+            request.data["atten_added_by_user"] = request.user.guid
             request.POST._mutable = False
 
             # if request.user.role in ['admin', 'manager'] or request.user.is_superuser:  # roles
@@ -461,7 +461,7 @@ class AttendanceController:
 
                 if instance:
                     request.POST._mutable = True
-                    request.data["updated_by"] = request.user.guid
+                    request.data["atten_updated_by_user"] = request.user.guid
                     request.POST._mutable = False
 
                     # updating the instance/record

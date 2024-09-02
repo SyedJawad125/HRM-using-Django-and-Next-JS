@@ -28,6 +28,7 @@ class Employee(models.Model):
     department = models.CharField(max_length=50)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
+    image = models.FileField(upload_to='employee_images/', blank=True, null=True)
     employee_has_dept = models.ForeignKey(Department, on_delete=models.CASCADE,related_name='dept_employee', null=True, blank=True)
     employee_has_role = models.ForeignKey(Role, on_delete=models.CASCADE,related_name='role_of_employee', null=True, blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name='employee_created_by', null=True, blank=True)

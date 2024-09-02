@@ -15,7 +15,8 @@ class EmployeeFilter(FilterSet):
 
     class Meta:
         model = Employee
-        fields ='__all__'
+        # fields ='__all__'
+        exclude = ['image']  # Exclude the 'image' field from the form
 
 class DepartmentFilter(FilterSet):
     id = CharFilter(field_name='id')

@@ -14,7 +14,7 @@ const EmployeeDetail = () => {
     if (EpmloyeeId) {
       const fetchEmployees = async () => {
         try {
-          const res = await AxiosInstance.get(`/ecommerce/employee?id=${EpmloyeeId}`);
+          const res = await AxiosInstance.get(`/hrm/employee?id=${EpmloyeeId}`);
           if (res && res.data && res.data.data) {
             setEmployees(res.data.data.data); // Convert to array if it's a single object
           } else {

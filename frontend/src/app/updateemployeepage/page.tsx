@@ -78,7 +78,7 @@ const UpdateEmployee = () => {
       if (image) formData.append('image', image);
       // formData.append('prod_has_category', prodHasCategory);
 
-      const response = await AxiosInstance.patch('/ecommerce/employee/?id=${employeeId}', formData, {
+      const response = await AxiosInstance.patch('/hrm/employee/?id=${employeeId}', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
