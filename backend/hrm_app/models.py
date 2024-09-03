@@ -77,3 +77,14 @@ class Attendance(models.Model):
     atten_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='atten_updated_by_user', null=True, blank=True)
     # total_hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     # remarks = models.TextField(blank=True, null=True)
+
+
+class Payroll(models.Model):
+    month = models.DateField()
+    basic_salary = models.DecimalField(max_digits=10, decimal_places=2)
+    deductions = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    net_salary = models.DecimalField(max_digits=10, decimal_places=2)
+    emp_payroll = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='payroll_of_employee', null=True, blank=True)
+    
+    def __str__(self):
+        return f"{self.emp_payroll.user.username} - {self.month}"
