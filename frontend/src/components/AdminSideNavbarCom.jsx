@@ -48,6 +48,11 @@ const Sidebar = () => {
                     Employee Record
                   </div>
                 </Link>
+                <Link href="/department">
+                  <div className={`block py-2.5 px-4 rounded ${isActive('/department') ? 'bg-gray-700' : 'hover:text-red-500 px-3 py-2'}`}>
+                    Department
+                  </div>
+                </Link>
           
             {/* )} */}
             <Link href="/clientselfpage">
