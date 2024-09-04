@@ -45,20 +45,20 @@ const EmployeeCom = () => {
     try {
       const res = await AxiosInstance.delete(`/hrm/department?id=${id}`);
       if (res) {
-        toast.success('Employee deleted successfully!');
+        toast.success('Department deleted successfully!');
         setCurrentPage(1); // Reset to the first page after deletion
       }
     } catch (error) {
-      toast.error('Error deleting employee!');
+      toast.error('Error deleting department!');
     }
   };
 
   const updateRecord = (item) => {
-    router.push(`/updateemployeepage?id=${item.id}`);
+    router.push(`/updatedepartment?id=${item.id}`);
   };
 
-  const DetailRecord = (employeeId) => {
-    router.push(`/epmloyeesdetail?EpmloyeeId=${employeeId}`);
+  const DetailRecord = (departmentId) => {
+    router.push(`/departmentdetails?DepartmentId=${departmentId}`);
   };
 
   const handleSearch = (e) => {
@@ -82,7 +82,7 @@ const EmployeeCom = () => {
   return (
     <div className="container mx-auto my-4 w-full bg-black ml-5">
       <ToastContainer />
-      <h2 className="text-2xl font-bold mb-4 text-center text-white">Employees Record</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center text-white">Departments Record</h2>
 
       {/* Conditionally render the Add Employee button based on user permissions */}
       {/* {permissions.create_employee && ( */}
@@ -90,7 +90,7 @@ const EmployeeCom = () => {
           className="btn btn-primary mt-3 bg-blue-500 text-white py-2 px-4 rounded"
           onClick={() => router.push('/adddepartmentpage')}
         >
-          Add Employee
+          Add Department
         </button>
       {/* )} */}
 
