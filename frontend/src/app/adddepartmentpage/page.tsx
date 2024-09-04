@@ -5,7 +5,7 @@ import AxiosInstance from "@/components/AxiosInstance";
 
 interface Departmet {
   id: number;
-  name: string;
+  dept_name: string;
   // Add other fields if necessary
 }
 const AddDepartment = () => {
@@ -17,7 +17,7 @@ const AddDepartment = () => {
   const [dept_budget, setdept_budget] = useState('');
   const [dept_projects, setdept_projects] = useState('');
   const [dept_goals, setdept_goals] = useState('');
-//   const [employeeRecords, setEmployeeRecords] = useState<Employee[]>([]);
+
 
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {

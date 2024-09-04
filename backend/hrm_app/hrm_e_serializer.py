@@ -12,8 +12,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data['created_by'] = UserListingSerializer(instance.created_by).data if instance.created_by else None
         data['updated_by'] = UserListingSerializer(instance.updated_by).data if instance.updated_by else None
+        data['dept_name'] = instance.employee_has_dept.dept_name if instance.employee_has_dept else None
         # data['rank'] = RankSerializerlisting(instance.rank).data if instance.rank else None
-
         # data['created_at_date'] = instance.created_at.date()
 
         return data

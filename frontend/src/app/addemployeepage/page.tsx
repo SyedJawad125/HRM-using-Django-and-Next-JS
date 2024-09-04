@@ -5,7 +5,7 @@ import AxiosInstance from "@/components/AxiosInstance";
 
 interface Employee {
   id: number;
-  name: string;
+  dept_name: string;
   // Add other fields if necessary
 }
 const AddEmployee = () => {
@@ -19,12 +19,33 @@ const AddEmployee = () => {
   const [date_of_birth, setdate_of_birth] = useState('');
   const [hire_date, sethire_date] = useState('');
   const [position, setposition] = useState('');
-  const [department, setdepartment] = useState('');
   const [salary, setsalary] = useState('');
   const [image, setImage] = useState<File | null>(null);
-  const [employeeRecords, setEmployeeRecords] = useState<Employee[]>([]);
+  const [empHasDepartment, setEmpHasDepartment] = useState('');
+  const [departmentRecords, setDepartmentRecords] = useState<Departmet[]>([]);
 
+  interface Departmet {
+    id: number;
+    dept_name: string;
+    // Add other fields if necessary
+  }
 
+  useEffect(() => {
+
+    // Fetch departments for the dropdown list
+    const fetchMenu = async () => {
+      try {
+        const res = await AxiosInstance.get('/hrm/department');
+        if (res) {
+          setDepartmentRecords(res.data.data.data);
+        }
+      } catch (error) {
+        console.log('Error occurred:', error);
+      }
+    };
+    fetchMenu();
+  }, []);
+  
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
@@ -36,10 +57,10 @@ const AddEmployee = () => {
       formData.append('date_of_birth', date_of_birth);
       formData.append('hire_date', hire_date);
       formData.append('position', position);
-      formData.append('department', department);
+      // formData.append('department', department);
       formData.append('salary', salary);
       if (image) formData.append('image', image);
-      // formData.append('prod_has_category', prodHasCategory);
+      formData.append('employee_has_dept', empHasDepartment);
 
       const response = await AxiosInstance.post('/hrm/employee', formData, {
         headers: {
@@ -170,7 +191,7 @@ const AddEmployee = () => {
         </div>
 
         {/* Department */}
-        <div className="mb-4">
+        {/* <div className="mb-4">
         <label htmlFor="department" className="block text-sm font-medium text-gray-1000">
             Department
         </label>
@@ -182,7 +203,26 @@ const AddEmployee = () => {
             value={department}
             onChange={(e) => setdepartment(e.target.value)}
         />
-        </div>
+        </div> */}
+
+<div className="mb-4">
+        <label htmlFor="category" className="block text-sm font-medium text-gray-1000">
+          Select Category
+        </label>
+        <select
+          id="category"
+          className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
+          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
+          onChange={(e) => setEmpHasDepartment(e.target.value)}
+        >
+          <option value="">Select Department</option>
+          {departmentRecords?.map((item) => (
+            <option value={item.id} key={item.id}>
+              {item.dept_name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
 
     <div className="grid grid-cols-2 gap-4 mb-4">
