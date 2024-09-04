@@ -3,15 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation'; // Next.js router
 import AxiosInstance from "@/components/AxiosInstance";
 
-interface Employee {
+interface Departmet {
   id: number;
   name: string;
   // Add other fields if necessary
 }
-const AddEmployee = () => {
+const AddDepartment = () => {
   const router = useRouter();
  
-
   const [dept_name, setdept_name] = useState('');
   const [dept_description, setdept_description] = useState('');
   const [dept_location, setdept_location] = useState('');
@@ -24,14 +23,17 @@ const AddEmployee = () => {
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
-      const response = await AxiosInstance.post('/hrm/employee', formData, {
+         const payload = {"dept_name":dept_name , "dept_description":dept_description,"dept_location":dept_location, 
+           "dept_budget":dept_budget, "dept_projects":dept_projects, "dept_goals":dept_goals}
+
+      const response = await AxiosInstance.post('/hrm/department', payload , {
         headers: {
-          'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json'
         },
       });
       if (response) {
         console.log('Response:', response.data);
-        router.push('/employeepage');
+        router.push('/department');
       }    // , { state: { message: 'Product Added!' } }
       
     } catch (error) {
@@ -48,7 +50,7 @@ const AddEmployee = () => {
     <div className="grid grid-cols-2 gap-2 mb-4"> {/* Reduced gap */}
         <div>
             <label htmlFor="first_name" className="block text-sm font-medium text-gray-1000">
-            First Name
+            Department Name
             </label>
             <input
             type="text"
@@ -61,7 +63,7 @@ const AddEmployee = () => {
         </div>
         <div>
             <label htmlFor="last_name" className="block text-sm font-medium text-gray-1000">
-            Last Name
+            Department Description
             </label>
             <input
             type="text"
@@ -77,7 +79,7 @@ const AddEmployee = () => {
         {/* Email */}
         <div className="mb-4">
         <label htmlFor="email" className="block text-sm font-medium text-gray-1000">
-            Email
+        Department Location
         </label>
         <input
             type="text"
@@ -92,7 +94,7 @@ const AddEmployee = () => {
         {/* Phone Number */}
         <div className="mb-4">
         <label htmlFor="phone_number" className="block text-sm font-medium text-gray-1000">
-            Phone Number
+        Department Budget
         </label>
         <input
             type="text"
@@ -108,7 +110,7 @@ const AddEmployee = () => {
         {/* Date of Birth */}
         <div className="mb-4">
         <label htmlFor="date_of_birth" className="block text-sm font-medium text-gray-1000">
-            Date Of Birth
+        Department Projects
         </label>
         <input
             type="text"
@@ -123,7 +125,7 @@ const AddEmployee = () => {
         {/* Hire Date */}
         <div className="mb-4">
         <label htmlFor="hire_date" className="block text-sm font-medium text-gray-1000">
-            Hire Date
+        Department Goals
         </label>
         <input
             type="text"
@@ -151,4 +153,6 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddDepartment;
+
+
