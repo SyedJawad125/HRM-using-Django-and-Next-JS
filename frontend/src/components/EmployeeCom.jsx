@@ -120,6 +120,8 @@ const EmployeeCom = () => {
               <span className="text-left -ml-44">Name</span>
               <span className="text-left -ml-44">Cell Number</span>
               <span className="text-left -ml-44">Department</span>
+              <span className="text-left -ml-44">Position</span>
+
             </div>
 
             {/* Data Rows */}
@@ -131,6 +133,8 @@ const EmployeeCom = () => {
                   <span className="text-left -ml-44 mt-4">{item.first_name} {item.last_name}</span>
                   <span className="text-left -ml-44 mt-4">{item.phone_number}</span>
                   <span className="text-left -ml-44 mt-4">{item.dept_name}</span>
+                  <span className="text-left -ml-44 mt-4">{item.role_name}</span>
+
 
                   <div className="col-span-6 flex justify-end space-x-2 mb-1 mr-5">
                     <button

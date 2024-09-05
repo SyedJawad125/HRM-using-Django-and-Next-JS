@@ -6,6 +6,7 @@ import AxiosInstance from "@/components/AxiosInstance";
 interface Employee {
   id: number;
   dept_name: string;
+  role_name: string;
   // Add other fields if necessary
 }
 const AddEmployee = () => {
@@ -18,33 +19,51 @@ const AddEmployee = () => {
   const [phone_number, setphone_number] = useState('');
   const [date_of_birth, setdate_of_birth] = useState('');
   const [hire_date, sethire_date] = useState('');
-  const [position, setposition] = useState('');
+  // const [position, setposition] = useState('');
   const [salary, setsalary] = useState('');
   const [image, setImage] = useState<File | null>(null);
   const [empHasDepartment, setEmpHasDepartment] = useState('');
   const [departmentRecords, setDepartmentRecords] = useState<Departmet[]>([]);
+  const [empHasRole, setEmpHasRole] = useState('');
+  const [roleRecords, setRoleRecords] = useState<Departmet[]>([]);
+
 
   interface Departmet {
     id: number;
     dept_name: string;
+    role_name: string;
     // Add other fields if necessary
   }
 
   useEffect(() => {
-
     // Fetch departments for the dropdown list
-    const fetchMenu = async () => {
+    const fetchDept = async () => {
       try {
         const res = await AxiosInstance.get('/hrm/department');
         if (res) {
           setDepartmentRecords(res.data.data.data);
         }
       } catch (error) {
-        console.log('Error occurred:', error);
+        console.log('Error occurred while fetching departments:', error);
       }
     };
-    fetchMenu();
-  }, []);
+  
+    // Fetch roles for the dropdown list
+    const fetchRole = async () => {
+      try {
+        const res = await AxiosInstance.get('/permission/role');
+        if (res) {
+          // Assuming you have another state to set roles
+          setRoleRecords(res.data.data.data); // Update with appropriate state setter
+        }
+      } catch (error) {
+        console.log('Error occurred while fetching roles:', error);
+      }
+    };
+  
+    fetchDept();
+    fetchRole();
+  }, []); // Empty dependency array ensures this effect runs once when the component mounts
   
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -56,11 +75,13 @@ const AddEmployee = () => {
       formData.append('phone_number', phone_number);
       formData.append('date_of_birth', date_of_birth);
       formData.append('hire_date', hire_date);
-      formData.append('position', position);
+      // formData.append('position', position);
       // formData.append('department', department);
       formData.append('salary', salary);
       if (image) formData.append('image', image);
       formData.append('employee_has_dept', empHasDepartment);
+      formData.append('employee_has_role', empHasRole);
+
 
       const response = await AxiosInstance.post('/hrm/employee', formData, {
         headers: {
@@ -175,39 +196,30 @@ const AddEmployee = () => {
     </div>
 
     <div className="grid grid-cols-2 gap-4 mb-4">
-        {/* Position */}
-        <div className="mb-4">
-        <label htmlFor="position" className="block text-sm font-medium text-gray-1000">
-            Position
-        </label>
-        <input
-            type="text"
-            id="position"
-            className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
-            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
-            value={position}
-            onChange={(e) => setposition(e.target.value)}
-        />
-        </div>
-
-        {/* Department */}
-        {/* <div className="mb-4">
-        <label htmlFor="department" className="block text-sm font-medium text-gray-1000">
-            Department
-        </label>
-        <input
-            type="text"
-            id="department"
-            className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
-            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
-            value={department}
-            onChange={(e) => setdepartment(e.target.value)}
-        />
-        </div> */}
-
-<div className="mb-4">
+       
+    <div className="mb-4">
         <label htmlFor="category" className="block text-sm font-medium text-gray-1000">
-          Select Category
+          Select Position
+        </label>
+        <select
+          id="category"
+          className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
+          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
+          onChange={(e) => setEmpHasRole(e.target.value)}
+        >
+          <option value="">Select Position</option>
+          {roleRecords?.map((item) => (
+            <option value={item.id} key={item.id}>
+              {item.role_name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+        
+      <div className="mb-4">
+        <label htmlFor="category" className="block text-sm font-medium text-gray-1000">
+          Select Department
         </label>
         <select
           id="category"
