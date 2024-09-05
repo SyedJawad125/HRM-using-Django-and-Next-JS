@@ -9,6 +9,7 @@ interface Employee {
   role_name: string;
   // Add other fields if necessary
 }
+
 const AddEmployee = () => {
   const router = useRouter();
  
@@ -25,12 +26,16 @@ const AddEmployee = () => {
   const [empHasDepartment, setEmpHasDepartment] = useState('');
   const [departmentRecords, setDepartmentRecords] = useState<Departmet[]>([]);
   const [empHasRole, setEmpHasRole] = useState('');
-  const [roleRecords, setRoleRecords] = useState<Departmet[]>([]);
+  const [roleRecords, setRoleRecords] = useState<Role[]>([]);
 
 
   interface Departmet {
     id: number;
     dept_name: string;
+    // Add other fields if necessary
+  }
+  interface Role {
+    id: number;
     role_name: string;
     // Add other fields if necessary
   }
@@ -198,11 +203,11 @@ const AddEmployee = () => {
     <div className="grid grid-cols-2 gap-4 mb-4">
        
     <div className="mb-4">
-        <label htmlFor="category" className="block text-sm font-medium text-gray-1000">
+        <label htmlFor="role" className="block text-sm font-medium text-gray-1000">
           Select Position
         </label>
         <select
-          id="category"
+          id="role"
           className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
           focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
           onChange={(e) => setEmpHasRole(e.target.value)}
