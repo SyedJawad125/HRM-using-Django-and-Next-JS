@@ -116,7 +116,7 @@ const EmployeeCom = () => {
             {/* Header Row */}
             <div className="grid grid-cols-6 text-white font-bold bg-gray-900 p-2 rounded-t-lg">
               <span className="text-left">S.No</span>
-              <span className="text-left -ml-24">ID</span>
+              <span className="text-left -ml-32">ID</span>
               <span className="text-left -ml-44">Detp Name</span>
               <span className="text-left -ml-44">Location</span>
               <span className="text-left -ml-48">Description</span>

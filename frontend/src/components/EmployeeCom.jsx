@@ -116,11 +116,11 @@ const EmployeeCom = () => {
             {/* Header Row */}
             <div className="grid grid-cols-6 text-white font-bold bg-gray-900 p-2 rounded-t-lg">
               <span className="text-left">S.No</span>
-              <span className="text-left -ml-24">ID</span>
-              <span className="text-left -ml-44">Name</span>
-              <span className="text-left -ml-44">Cell Number</span>
-              <span className="text-left -ml-44">Department</span>
-              <span className="text-left -ml-44">Position</span>
+              <span className="text-left -ml-32">ID</span>
+              <span className="text-left -ml-60">Name</span>
+              <span className="text-left -ml-56">Department</span>
+              <span className="text-left -ml-52">Position</span>
+              <span className="text-left -ml-52">Cell Number</span>
 
             </div>
 
@@ -129,11 +129,11 @@ const EmployeeCom = () => {
               {filteredRecords.map((item, index) => (
                 <li key={item.id} className="grid grid-cols-6 bg-gray-800 text-white p-0 border-t border-gray-700 mt-4">
                   <span className="text-left ml-2 mt-4">{(currentPage - 1) * recordsPerPage + index + 1}</span>
-                  <span className="text-left -ml-24 mt-4">{item.id}</span>
-                  <span className="text-left -ml-44 mt-4">{item.first_name} {item.last_name}</span>
-                  <span className="text-left -ml-44 mt-4">{item.phone_number}</span>
-                  <span className="text-left -ml-44 mt-4">{item.dept_name}</span>
-                  <span className="text-left -ml-44 mt-4">{item.role_name}</span>
+                  <span className="text-left -ml-32 mt-4">{item.id}</span>
+                  <span className="text-left -ml-60 mt-4">{item.first_name} {item.last_name}</span>
+                  <span className="text-left -ml-56 mt-4">{item.dept_name}</span>
+                  <span className="text-left -ml-52 mt-4">{item.role_name}</span>
+                  <span className="text-left -ml-52 mt-4">{item.phone_number}</span>
 
 
                   <div className="col-span-6 flex justify-end space-x-2 mb-1 mr-5">
