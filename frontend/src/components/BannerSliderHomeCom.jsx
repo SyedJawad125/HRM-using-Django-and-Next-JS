@@ -3,11 +3,16 @@ import Image from 'next/image';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import banner1 from '../../public/images/banner1.jpg'
-import banner2 from '../../public/images/banner2.jpg'
-import banner3 from '../../public/images/banner3.jpg'
-import banner4 from '../../public/images/banner4.jpg'
-import banner5 from '../../public/images/banner5.jpg'
+import b1 from '../../public/images/b1.jpg'
+import b2 from '../../public/images/b2.jpg'
+import b3 from '../../public/images/b3.jpg'
+import b4 from '../../public/images/b4.jpg'
+import b5 from '../../public/images/b5.webp'
+import b6 from '../../public/images/b6.jpg'
+import b7 from '../../public/images/b7.jpg'
+import b9 from '../../public/images/b9.webp'
+import b10 from '../../public/images/b10.jpg'
+import b11 from '../../public/images/b11.png'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel";
 
@@ -28,7 +33,7 @@ const NextJsCarousel = () => {
           >
               <div>
                   <Image
-                      src={banner1}
+                      src={b1}
                       alt="image1"
                       className="w-full h-[87vh] object-cover"
                   />
@@ -36,7 +41,7 @@ const NextJsCarousel = () => {
               </div>
               <div>
                   <Image
-                      src={banner2}
+                      src={b2}
                       alt="image2"
                       className="w-full h-[87vh] object-cover"
                   />
@@ -44,7 +49,7 @@ const NextJsCarousel = () => {
               </div>
               <div>
                   <Image
-                      src={banner3}
+                      src={b3}
                       alt="image3"
                       className="w-full h-[87vh] object-cover"
                   />
@@ -52,7 +57,7 @@ const NextJsCarousel = () => {
               </div>
               <div>
                   <Image
-                      src={banner4}
+                      src={b4}
                       alt="image4"
                       className="w-full h-[87vh] object-cover"
                   />
@@ -60,7 +65,47 @@ const NextJsCarousel = () => {
               </div>
               <div>
                   <Image
-                      src={banner5}
+                      src={b5}
+                      alt="image5"
+                      className="w-full h-[87vh] object-cover"
+                  />
+                  {/* <p className="legend">Image 5</p> */}
+              </div>
+              <div>
+                  <Image
+                      src={b6}
+                      alt="image1"
+                      className="w-full h-[87vh] object-cover"
+                  />
+                  {/* <p className="legend">Image 1</p> */}
+              </div>
+              <div>
+                  <Image
+                      src={b7}
+                      alt="image2"
+                      className="w-full h-[87vh] object-cover"
+                  />
+                  {/* <p className="legend">Image 2</p> */}
+              </div>
+              <div>
+                  <Image
+                      src={b9}
+                      alt="image3"
+                      className="w-full h-[87vh] object-cover"
+                  />
+                  {/* <p className="legend">Image 3</p> */}
+              </div>
+              <div>
+                  <Image
+                      src={b10}
+                      alt="image4"
+                      className="w-full h-[87vh] object-cover"
+                  />
+                  {/* <p className="legend">Image 4</p> */}
+              </div>
+              <div>
+                  <Image
+                      src={b11}
                       alt="image5"
                       className="w-full h-[87vh] object-cover"
                   />
