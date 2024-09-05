@@ -36,7 +36,7 @@ const AddEmployee = () => {
   }
   interface Role {
     id: number;
-    role_name: string;
+    name: string;
     // Add other fields if necessary
   }
 
@@ -201,27 +201,6 @@ const AddEmployee = () => {
     </div>
 
     <div className="grid grid-cols-2 gap-4 mb-4">
-       
-    <div className="mb-4">
-        <label htmlFor="role" className="block text-sm font-medium text-gray-1000">
-          Select Position
-        </label>
-        <select
-          id="role"
-          className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
-          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
-          onChange={(e) => setEmpHasRole(e.target.value)}
-        >
-          <option value="">Select Position</option>
-          {roleRecords?.map((item) => (
-            <option value={item.id} key={item.id}>
-              {item.role_name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-        
       <div className="mb-4">
         <label htmlFor="category" className="block text-sm font-medium text-gray-1000">
           Select Department
@@ -236,6 +215,24 @@ const AddEmployee = () => {
           {departmentRecords?.map((item) => (
             <option value={item.id} key={item.id}>
               {item.dept_name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="role" className="block text-sm font-medium text-gray-1000">
+          Select Position
+        </label>
+        <select
+          id="role"
+          className="mt-1 block w-2/4 px-3 py-2 bg-white border border-gray-300 rounded-lg shadow-sm 
+          focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-md text-gray-900"
+          onChange={(e) => setEmpHasRole(e.target.value)}
+        >
+          <option value="">Select Position</option>
+          {roleRecords?.map((item) => (
+            <option value={item.id} key={item.id}>
+              {item.name}
             </option>
           ))}
         </select>
