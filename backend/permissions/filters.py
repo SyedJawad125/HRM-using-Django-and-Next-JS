@@ -9,6 +9,8 @@ class RoleFilter(FilterSet):
     name = CharFilter(field_name='name', lookup_expr='icontains')
     description = CharFilter(field_name='description', lookup_expr='icontains')
 
+    
+
     class Meta:
         model = Role
         fields ='__all__'

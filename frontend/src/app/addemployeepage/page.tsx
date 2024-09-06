@@ -40,35 +40,35 @@ const AddEmployee = () => {
     // Add other fields if necessary
   }
 
+  // Fetch departments on component mount
   useEffect(() => {
-    // Fetch departments for the dropdown list
     const fetchDept = async () => {
       try {
         const res = await AxiosInstance.get('/hrm/department');
-        if (res) {
-          setDepartmentRecords(res.data.data.data);
-        }
+        setDepartmentRecords(res.data.data.data);
       } catch (error) {
         console.log('Error occurred while fetching departments:', error);
       }
     };
-  
-    // Fetch roles for the dropdown list
-    const fetchRole = async () => {
-      try {
-        const res = await AxiosInstance.get('/permission/role');
-        if (res) {
-          // Assuming you have another state to set roles
-          setRoleRecords(res.data.data.data); // Update with appropriate state setter
+    fetchDept();
+  }, []);
+
+  // Fetch roles when department is selected
+  useEffect(() => {
+    const fetchRolesByDepartment = async () => {
+      if (empHasDepartment) {
+        try {
+          const res = await AxiosInstance.get(`/permission/role?department__id=${empHasDepartment}`);
+          setRoleRecords(res.data.data.data); // Update role records based on selected department
+        } catch (error) {
+          console.log('Error occurred while fetching roles:', error);
         }
-      } catch (error) {
-        console.log('Error occurred while fetching roles:', error);
+      } else {
+        setRoleRecords([]); // Clear roles if no department is selected
       }
     };
-  
-    fetchDept();
-    fetchRole();
-  }, []); // Empty dependency array ensures this effect runs once when the component mounts
+    fetchRolesByDepartment();
+  }, [empHasDepartment]);
   
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
