@@ -10,7 +10,7 @@ class RoleSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        # data['role_name'] = instance.employee_has_dept.dept_name if instance.employee_has_dept else None
+        data['role_has_dept_name'] = instance.role_has_dept.dept_name if instance.role_has_dept else None
         # data['role_added_by_user'] = UserListingSerializer(instance.role_added_by_user).data if instance.role_added_by_user else None
         # data['role_updated_by_user'] = UserListingSerializer(instance.role_updated_by_user).data if instance.role_updated_by_user else None
         # data['permissions'] = PermissionSerializer(instance.permissions.all(), many=True).data if instance.permissions else None

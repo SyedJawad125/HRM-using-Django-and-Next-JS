@@ -12,7 +12,6 @@ class Department(models.Model):
     dept_budget = models.PositiveBigIntegerField()
     dept_projects = models.TextField()
     dept_goals = models.TextField()
-    # dept_have_roles = models.ManyToManyField(Role, related_name='roles_of_dept')
     dept_added_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='dept_added_by_user', null=True, blank=True)
     dept_updated_by_user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='dept_updated_by_user', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_dept', null=True, blank=True)

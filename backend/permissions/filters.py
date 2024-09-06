@@ -8,8 +8,8 @@ class RoleFilter(FilterSet):
     date_to = DateFilter(field_name='created_at', lookup_expr='lte' )
     name = CharFilter(field_name='name', lookup_expr='icontains')
     description = CharFilter(field_name='description', lookup_expr='icontains')
+    role_has_dept = CharFilter(field_name='role_has_dept', lookup_expr='exact')
 
-    
 
     class Meta:
         model = Role

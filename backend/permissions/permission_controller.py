@@ -18,6 +18,7 @@ import threading
 class RoleController:
     serializer_class = RoleSerializer
     filterset_class = RoleFilter
+
     def create(self, request):
         try:
             # request.POST._mutable = True
@@ -40,75 +41,73 @@ class RoleController:
     
      #mydata = Member.objects.filter(firstname__endswith='s').values()
     # Updated get_role function in Django
-def get_role(self, request):
+    def get_role(self, request):
+            try:
+                
+                instances = self.serializer_class.Meta.model.objects.all()
+                
+                filtered_data = self.filterset_class(request.GET, queryset=instances)
+                data = filtered_data.qs
+        
+                paginated_data, count = paginate_data(data, request)
+                
+                serialized_data = self.serializer_class(paginated_data, many=True).data
+                response_data = {
+                    "count":count,
+                    "data":serialized_data,
+                }
+                return create_response(response_data, "SUCCESSFUL", 200)
+
+
+            except Exception as e:
+                return Response({'error':str(e)}, 500)
+            
+
+    def update_role(self, request):
         try:
-            
-            instances = self.serializer_class.Meta.model.objects.all()
-            
-            filtered_data = self.filterset_class(request.GET, queryset=instances)
-            data = filtered_data.qs
-      
-            paginated_data, count = paginate_data(data, request)
-            
-            serialized_data = self.serializer_class(paginated_data, many=True).data
-            response_data = {
-                "count":count,
-                "data":serialized_data,
-            }
-            return create_response(response_data, "SUCCESSFUL", 200)
+            if "id" in request.data:
+                #finding instance
+                instance = Role.objects.filter(id=request.data["id"]).first()
 
+                if instance:
+                    # request.POST._mutable = True
+                    # request.data["role_updated_by_user"] = request.user.guid
+                    # request.POST._mutable = False
 
-        except Exception as e:
-              return Response({'error':str(e)}, 500)
-        
-
-    
-    
-def update_role(self, request):
-    try:
-        if "id" in request.data:
-            #finding instance
-            instance = Role.objects.filter(id=request.data["id"]).first()
-
-            if instance:
-                # request.POST._mutable = True
-                # request.data["role_updated_by_user"] = request.user.guid
-                # request.POST._mutable = False
-
-                # updating the instance/record
-                serialized_data = RoleSerializer(instance, data=request.data, partial=True)
-                # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
-                if serialized_data.is_valid():
-                    response = serialized_data.save()
-                    response_data = RoleSerializer(response).data
-                    return Response({"data":response_data}, 200)
+                    # updating the instance/record
+                    serialized_data = RoleSerializer(instance, data=request.data, partial=True)
+                    # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
+                    if serialized_data.is_valid():
+                        response = serialized_data.save()
+                        response_data = RoleSerializer(response).data
+                        return Response({"data":response_data}, 200)
+                    else:
+                        error_message = get_first_error_message(serialized_data.errors, "UNSUCCESSFUL")
+                        return Response({'data':error_message}, 400)
+                    # else:
+                    #     return Response({'data':"Permission Denaied"}, 400)
                 else:
-                    error_message = get_first_error_message(serialized_data.errors, "UNSUCCESSFUL")
-                    return Response({'data':error_message}, 400)
-                # else:
-                #     return Response({'data':"Permission Denaied"}, 400)
+                    return Response({"data":"NOT FOUND"}, 404)
             else:
-                return Response({"data":"NOT FOUND"}, 404)
-        else:
-            return Response({"data":"ID NOT PROVIDED"}, 400)
-        
-    except Exception as e:
-        return Response({'error':str(e)}, 500)
+                return Response({"data":"ID NOT PROVIDED"}, 400)
+            
+        except Exception as e:
+            return Response({'error':str(e)}, 500)
 
-def delete_role(self, request):
-    try:
-        if "id" in request.query_params:
-            instance = Role.objects.filter(id=request.query_params['id']).first()
+    def delete_role(self, request):
+        try:
+            if "id" in request.query_params:
+                instance = Role.objects.filter(id=request.query_params['id']).first()
 
-            if instance:
-                instance.delete()
-                return Response({"data":"SUCESSFULL"}, 200)
+                if instance:
+                    instance.delete()
+                    return Response({"data":"SUCESSFULL"}, 200)
+                else:
+                    return Response({"data":"RECORD NOT FOUND"}, 404) 
             else:
-                return Response({"data":"RECORD NOT FOUND"}, 404) 
-        else:
-            return Response({"data":"ID NOT PROVIDED"}, 400)
-    except Exception as e:
-        return Response({'error':str(e)}, 500)
+                return Response({"data":"ID NOT PROVIDED"}, 400)
+        except Exception as e:
+            return Response({'error':str(e)}, 500)
 
 
 class PermissionController:
@@ -116,9 +115,9 @@ class PermissionController:
     filterset_class = PermissionFilter
     def create(self, request):
         try:
-            # request.POST._mutable = True
-            # request.data["per_added_by_user"] = request.user.guid
-            # request.POST._mutable = False
+            request.POST._mutable = True
+            request.data["per_added_by_user"] = request.user.guid
+            request.POST._mutable = False
             #
             # # if request.user.role in ['admin','manager'] or request.user.is_superuser: # roles
             validated_data = PermissionSerializer(data=request.data)
@@ -164,9 +163,9 @@ class PermissionController:
                 instance = Permission.objects.filter(id=request.data["id"]).first()
 
                 if instance:
-                    # request.POST._mutable = True
-                    # request.data["per_updated_by_user"] = request.user.guid
-                    # request.POST._mutable = False
+                    request.POST._mutable = True
+                    request.data["per_updated_by_user"] = request.user.guid
+                    request.POST._mutable = False
 
                     # updating the instance/record
                     serialized_data = PermissionSerializer(instance, data=request.data, partial=True)

@@ -58,7 +58,7 @@ const AddEmployee = () => {
     const fetchRolesByDepartment = async () => {
       if (empHasDepartment) {
         try {
-          const res = await AxiosInstance.get(`/permission/role?department__id=${empHasDepartment}`);
+          const res = await AxiosInstance.get(`/permission/role?role_has_dept=${empHasDepartment}`);
           setRoleRecords(res.data.data.data); // Update role records based on selected department
         } catch (error) {
           console.log('Error occurred while fetching roles:', error);
