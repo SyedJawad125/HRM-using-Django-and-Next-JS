@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import AxiosInstance from '@/components/AxiosInstance';
+import Image from 'next/image';
 
 const EmployeeDetail = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const EmployeeDetail = () => {
           <div className="flex flex-col items-center md:items-start md:w-1/3">
             {employee.image && (
               <div className="flex flex-col items-center md:items-start mt-5">
-                <img 
+                <Image  
                   src={`http://localhost:8000/${employee.image}`} 
                   alt={`${employee.first_name} ${employee.last_name}`} 
                   className="rounded-lg shadow-lg w-48 h-48 object-cover mb-2" 

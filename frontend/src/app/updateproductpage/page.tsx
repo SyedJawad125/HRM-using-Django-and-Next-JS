@@ -66,7 +66,7 @@ const UpdateProduct = () => {
     // fetchProductDetails();
     fetchCategories();
   // }, []); 
-}, [])
+}, [productId])
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
