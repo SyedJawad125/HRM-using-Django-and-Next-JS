@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoryWiseProductCom from "@/components/CategoryWiseProductCom";
+// import CategoryWiseProductCom from "@/components/CategoryWiseProductCom";
 import NavbarCom from "@/components/NavbarCom";
 import TopNavbarCom from "@/components/TopNavbarCom";
 import FooterCom from "@/components/FooterCom";
@@ -9,7 +9,7 @@ const page = () => {
     <div>
         <TopNavbarCom/>
         <NavbarCom/>
-        <CategoryWiseProductCom/>
+        {/* <CategoryWiseProductCom/> */}
         <FooterCom />
     </div>
   )
