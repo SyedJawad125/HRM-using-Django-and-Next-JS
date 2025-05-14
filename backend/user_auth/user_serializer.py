@@ -149,8 +149,8 @@ class ForgetPasswordSerializer(serializers.Serializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField(
-        label="username",
+    email = serializers.CharField(
+        label="email",
         trim_whitespace=True,
         write_only=True
     )
@@ -162,14 +162,14 @@ class LoginSerializer(serializers.Serializer):
     )
 
     def validate(self, data):
-        username = data.get('username')
+        email = data.get('email')
         password = data.get('password')
 
         # Check if the user exists
         try:
-            user = User.objects.get(username=username)
+            user = User.objects.get(email=email)
         except User.DoesNotExist:
-            raise serializers.ValidationError("Invalid username or password.", code='authentication')
+            raise serializers.ValidationError("Invalid email or password.", code='authentication')
 
         # Check if the account is active and not locked
         if not user.is_active or user.is_locked:
@@ -177,7 +177,7 @@ class LoginSerializer(serializers.Serializer):
 
         # Check the password
         if not user.check_password(password):
-            raise serializers.ValidationError("Invalid username or password.", code='authentication')
+            raise serializers.ValidationError("Invalid email or password.", code='authentication')
 
         # Attach the user to the data for use in to_representation
         data['user'] = user

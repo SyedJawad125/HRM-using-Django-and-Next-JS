@@ -34,7 +34,9 @@ JWT_ENCODING_SECRET_KEY= 'Cyber@123'
 JWT_TOKEN_EXPIRY_DELTA= 300000
 AUTH_USER_MODEL = 'user_auth.User'
 
-AUTHENTICATION_BACKENDS = ["utils.base_authentication.AuthenticationBackend"]
+# AUTHENTICATION_BACKENDS = ["utils.base_authentication.AuthenticationBackend"]
+AUTHENTICATION_BACKENDS = ['user_auth.authentication.EmailBackend']
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/

@@ -208,7 +208,7 @@ class LoginController():
                 }, status=status.HTTP_400_BAD_REQUEST)
 
             # Authenticate the user
-            user = authenticate(username=request.data['username'], password=request.data['password'])
+            user = authenticate(email=request.data['email'], password=request.data['password'])
             if not user:
                 return Response({
                     "message": "Incorrect email or password"
