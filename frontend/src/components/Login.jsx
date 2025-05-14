@@ -11,14 +11,14 @@ const Login = () => {
   const router = useRouter();
   const { login } = useContext(AuthContext);
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const payload = { username, password };
+      const payload = { email, password };
       const response = await AxiosInstance.post('/user/login', payload, {
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const Login = () => {
         router.push("/admindashboard");
       }
     } catch (error) {
-      toast.error("Your username or password is incorrect", {
+      toast.error("Your email or password is incorrect", {
         position: "top-center",
         autoClose: 3000,
       });
@@ -58,12 +58,12 @@ const Login = () => {
         <div className="bg-black shadow-md rounded-lg p-8 mt-5">
           <h3 className="text-center text-2xl font-semibold">Login</h3>
           <form onSubmit={handleSubmit}>
-            <label className="block text-sm font-medium text-gray-500 mb-2">User Name</label>
+            <label className="block text-sm font-medium text-gray-500 mb-2">Email</label>
             <input
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter Username"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Email Id"
               className="w-full text-black px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
             <label className="block text-sm font-medium text-gray-500 mt-2 mb-2">Password</label>
