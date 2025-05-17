@@ -55,7 +55,7 @@ class User(TimeStamps, AbstractUser):
     guid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=100, blank=True, null=True, validators=[alphabetic_validator])
     last_name = models.CharField(max_length=100, blank=True, null=True, validators=[alphabetic_validator])
-    username = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
+    username = models.CharField(max_length=100,unique=True, validators=[MinLengthValidator(3)])
     email = models.EmailField(unique=True, validators=[EmailValidator()])
     phone = models.CharField(max_length=50, blank=True, null=True, validators=[RegexValidator
                                (regex=r'^\+?1?\d{9,15}$', message="Phone number must be between 9 to 15 digits.")])
